@@ -66,7 +66,7 @@ def classify_sentiment(review: str, max_retries: int = 1) -> SentimentResult:
         #     )
         # Anthropic: text = response.content[0].text
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-3.5-flash",
             contents=prompt,
         )
         try:
@@ -96,7 +96,7 @@ def stream_explanation(review: str) -> None:
     #     for text in stream.text_stream:
     #         print(text, end = "", flush = True)
     for chunk in client.models.generate_content_stream(
-        model="gemini-2.0-flash",
+        model="gemini-3.5-flash",
         contents=prompt,
     ):
         print(chunk.text, end="", flush=True)
