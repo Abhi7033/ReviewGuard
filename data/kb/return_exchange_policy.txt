@@ -1,0 +1,18 @@
+Return and Exchange Policy
+
+Customers can return most items within 30 days of delivery for a refund, or exchange for a
+different size/color/variant if one is available, at no extra cost as long as the exchange is
+initiated within the same 30 day window.
+
+Items need to be in resellable condition for a standard return - original packaging preferred
+but not strictly required if the item itself is unused. This is different from damaged or
+defective items, which don't need to be returned at all in most cases (check the damaged item
+guide for that flow instead).
+
+Return shipping is free if the return is due to our error (wrong item shipped, item doesn't
+match the listing) but costs the customer a flat $5 fee otherwise, deducted from the refund. We
+don't charge this fee if the customer is a repeat customer with 3+ prior orders, as a goodwill
+gesture, though this isn't advertised publicly.
+
+Exchanges ship out as soon as the original item's return is scanned by the carrier, not when it
+physically arrives back at the warehouse - this cuts down wait time noticeably.

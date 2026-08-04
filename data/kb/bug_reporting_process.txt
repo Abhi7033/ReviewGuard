@@ -1,0 +1,18 @@
+App Crashes and Bug Reports
+
+When a customer reports the app crashing, freezing, or a specific feature not working (like
+uploads failing), the goal is to get enough detail for engineering without turning the support
+conversation into a debugging session the customer didn't sign up for.
+
+Ask for: device type and OS version, app version if they know it, and what they were doing right
+before the crash. Don't ask for anything beyond that unless engineering specifically requests it
+for a known issue.
+
+If it matches a known issue already being tracked, tell the customer that directly - "we're aware
+of this and a fix is in progress" - rather than opening a fresh investigation. If it's a new
+report, file it and let the customer know it's been logged, but don't promise a fix timeline
+since we don't control the engineering backlog from support.
+
+For crashes tied to a specific action (uploading a file, opening a certain screen), a temporary
+workaround is worth offering if one exists, even if it's not a real fix - customers generally
+appreciate being unblocked now over waiting for a proper fix later.

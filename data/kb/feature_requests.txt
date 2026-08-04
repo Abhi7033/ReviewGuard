@@ -1,0 +1,17 @@
+handling feature requests
+
+sometimes customers leave a review or contact support just to ask for something new - dark mode,
+offline support, a specific integration, whatever. these aren't complaints and shouldn't be
+treated like a problem to fix, but they also shouldn't be ignored.
+
+log the request with enough detail that product can actually act on it later (what they want and
+why, not just "wants dark mode"). thank the customer for the suggestion specifically, don't send
+a generic "thanks for your feedback" that could apply to anything.
+
+don't promise a timeline or even that the feature will happen at all - just that it's been passed
+along. if the same request comes up a lot, mention that internally, since volume matters a lot
+more for prioritization than any one request.
+
+if a customer is asking for something that already exists but they haven't found it (this happens
+a lot with settings that are buried in a menu), that's not actually a feature request - just
+point them to where it already is.

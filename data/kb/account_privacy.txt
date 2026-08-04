@@ -1,0 +1,12 @@
+Account Data and Privacy Notes
+
+Customers occasionally ask about deleting their account or what data we keep. Account deletion
+requests should be forwarded to the privacy team directly rather than handled in a normal support
+conversation - support can confirm we received the request but shouldn't process it directly.
+
+Order history is retained for 7 years for tax and accounting purposes even after an account is
+deleted, though it's disassociated from any personally identifying info beyond what's legally
+required to keep.
+
+If a customer asks what data we have on them, that's a data access request and also goes to the
+privacy team, not handled ad hoc by support.

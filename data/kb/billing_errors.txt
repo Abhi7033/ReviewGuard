@@ -1,0 +1,19 @@
+Billing Errors - Internal Notes
+
+Double charges and failed-payment-but-still-charged cases come up often enough that they get
+their own process instead of going through the normal refund flow.
+
+If a customer says they were charged twice for the same order, first check whether it's actually
+two separate orders (this happens more than you'd think) before assuming it's an error. If it is
+a genuine duplicate charge, the extra charge should be reversed within 2 business days, not the
+usual 5-7 day refund window - this is a billing correction, not a refund, and customers should be
+told that explicitly so they don't think we're being slow.
+
+Same urgency applies when a customer's bank shows a charge went through but our system shows the
+payment failed and the order was never placed. This is usually a temporary authorization hold
+that will drop off on the bank's side within a few days, but if the customer is anxious about it,
+escalate to billing so they can confirm directly rather than telling the customer to "just wait
+and see."
+
+Do not tell customers to dispute the charge with their bank as a first step - that triggers a
+chargeback process on our end that's more painful for everyone than just fixing it directly.

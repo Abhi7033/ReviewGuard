@@ -1,0 +1,20 @@
+setting up your product - quick notes
+
+ok so a few customers have said the included instructions are confusing, here's what support
+should know to fill the gaps.
+
+first thing - the quick start card in the box is intentionally minimal, it's not meant to cover
+everything, full instructions are on the support site under "getting started" but customers don't
+always find this on their own, so just link it directly instead of pointing them to "check the
+website" which is too vague.
+
+biggest confusion point by far is the initial pairing/setup step - customers often think the
+product is broken when really it just needs a firmware update on first boot, which can take a
+few minutes and doesn't show much on-screen feedback while it happens. tell people to just wait
+it out, up to 5 minutes, before assuming something's wrong.
+
+second biggest issue: people skip the app download step because the quick start card mentions it
+last, when really it should happen first. if someone's stuck on setup, first question to ask is
+whether they've downloaded the companion app yet, before troubleshooting anything else.
+
+not really a formal FAQ doc, just things that keep coming up
