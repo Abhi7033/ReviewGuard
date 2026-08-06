@@ -1,0 +1,12 @@
+[
+  {"order_id": "ORD-1001", "status": "delivered", "ship_date": "2026-07-20"},
+  {"order_id": "ORD-1002", "status": "shipped", "ship_date": "2026-08-02"},
+  {"order_id": "ORD-1003", "status": "processing", "ship_date": null},
+  {"order_id": "ORD-1004", "status": "delayed", "ship_date": "2026-07-15"},
+  {"order_id": "ORD-1005", "status": "delivered", "ship_date": "2026-07-28"},
+  {"order_id": "ORD-1006", "status": "cancelled", "ship_date": null},
+  {"order_id": "ORD-1007", "status": "returned", "ship_date": "2026-07-10"},
+  {"order_id": "ORD-1008", "status": "delivered", "ship_date": "2026-08-01"},
+  {"order_id": "ORD-1009", "status": "shipped", "ship_date": "2026-08-04"},
+  {"order_id": "ORD-1010", "status": "delayed", "ship_date": "2026-07-22"}
+]
