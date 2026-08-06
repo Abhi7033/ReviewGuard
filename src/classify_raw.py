@@ -37,7 +37,7 @@ def estimate_cost(review: str) -> float:
     count = len(build_prompt(review))
     tokens: float = count/4
     # Anthropic: considering 3$ per 1 million input tokens (Claude Sonnet)
-    # Gemini free tier (gemini-2.0-flash) is $0 - update this if you move to a paid tier
+    # Gemini free tier (gemini-3.5-flash) is $0 - update this if you move to a paid tier
     return tokens * 0/1000000
 
 
