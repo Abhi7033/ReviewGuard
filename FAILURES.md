@@ -21,3 +21,19 @@ Switched to hit_rate@1 for a metric that actually discriminates.
   doesn't clearly separate "wrong size" from "arrived broken." The real fix is better KB content,
   not better retrieval — a lesson in itself: retrieval quality is capped by knowledge base
   quality, not just algorithm choice.
+
+## Day 4 — free-tier quota is per-project, not per-key
+
+Testing the hand-written tool loop, hit repeated 503s on gemini-3.5-flash, then a hard 429:
+`GenerateRequestsPerDayPerProjectPerModel-FreeTier, limit: 20`. Generated a brand new API key
+from the same Google account expecting a fresh quota — same 429, same limit: 20. The daily quota
+is scoped to the underlying Google Cloud project, not the individual API key, so a new key from
+the same account/project shares the same exhausted bucket. Only a genuinely different account
+(different project) had separate quota. Lesson: rotating keys is not the same as rotating
+quota — check what the limit is actually scoped to before assuming a new credential helps.
+
+Also: verified the MCP SDK's actual API from the installed package instead of trusting my own
+memory of the library. My prior knowledge said `FastMCP` from `mcp.server.fastmcp` - the actually
+installed version (2.0.0) uses `MCPServer` from `mcp.server.mcpserver.server` instead. Same
+lesson as Day 2's Vertex AI mixup: verify against what's actually installed, not what you
+remember, especially for fast-moving SDKs.
