@@ -7,7 +7,6 @@ from .rag import retrieve_hybrid
 ORDERS_PATH = Path("data/orders.json")
 TICKETS_PATH = Path("data/tickets.jsonl")
 
-
 def search_knowledge_base(query: str) -> str:
     """Search the knowledge base for guidance relevant to a customer's issue."""
     results = retrieve_hybrid(query, k_candidates=20, k_final=3)
