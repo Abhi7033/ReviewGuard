@@ -93,13 +93,3 @@ knowledge base content, not a better algorithm. Full breakdown in `FAILURES.md`.
   checking for a non-zero exit code.
 - **Always verify a fast-moving SDK against what's actually installed**, not training-data memory
   — this bit twice (MCP's `FastMCP` → `MCPServer` rename, LangGraph SQLite checkpointer API).
-
-## Progress
-
-- [x] Day 1 — raw sentiment classifier (no framework)
-- [x] Day 2 — LCEL chain, swappable provider
-- [x] Day 3 — RAG for grounded solutions, naive → measured → hybrid
-- [x] Day 4 — tools: hand-written loop + MCP
-- [x] Day 5 — high-level agent (`create_agent`), deliberately broken
-- [x] Day 6 — LangGraph state machine: severity routing, human-approval interrupt, durable restart
-- [x] Day 7 — scored eval + CI gate, tracing confirmed, shipped
