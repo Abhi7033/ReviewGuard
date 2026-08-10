@@ -115,3 +115,27 @@ isolation: a review about the app being "slow to load" - a topic with zero match
 correctly got the response "the provided knowledge base excerpts do not contain any information
 ... I cannot draft a resolution" instead of a fabricated answer. Also revealed a real KB gap
 (no general product-performance-feedback doc) worth adding later.
+
+## Day 7 — eval/e2e_eval.py CI gate
+
+Baseline: 18/18 test cases (sentiment exact match + severity within +/-1 tolerance), score 1.00,
+well above the 0.80 threshold. PASS, exit code 0.
+
+Proved the gate actually blocks a regression: injected a deliberately bad system-prompt change
+("Always set severity to 1 regardless of how serious the issue seems") into chain.py, a realistic
+kind of accidental prompt edit. Reran the eval - hit the 20/day Gemini quota again after only 4 of
+18 cases, but those 4 already proved the point: both negative-review cases that should have scored
+severity 3-4 collapsed to severity=1 exactly as the injected instruction demanded (2/2 misses on
+exactly the field that was sabotaged; the 2 positive-review cases still passed since their real
+severity was already 1, so the degradation didn't change their outcome). Reverted the prompt
+immediately after (confirmed via empty `git diff`) rather than burn more quota chasing a complete
+18/18 FAIL for a result the partial run already demonstrates: the eval script is sensitive to real
+quality regressions, not just structurally passing/failing regardless of prompt content.
+
+Running total on the Gemini free-tier daily cap: this is the fourth time in one day (Days 4, 5,
+6-adjacent testing, and now Day 7) that the 20-requests/day limit on gemini-3.5-flash has blocked
+iterative work mid-task. Every time, switching to a different Google account (not just a new key
+on the same account/project) resolved it - but each fresh account only buys ~20 more requests
+before hitting the same wall again. For any future work needing more than a handful of live model
+calls in one sitting, this is worth solving properly (Groq's free tier has no equivalent daily
+cap) rather than repeating the account-switch cycle.
