@@ -3,5 +3,7 @@ __pycache__/
 *.pyc
 .env
 data/chroma/
+data/graph_checkpoints.db
+data/tickets.jsonl
 *.egg-info/
 .pytest_cache/

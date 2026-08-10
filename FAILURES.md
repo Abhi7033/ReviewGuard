@@ -89,3 +89,29 @@ doesn't do it for free. This is exactly the gap Day 6's LangGraph is supposed to
 of a black-box loop that crashes on the exact failure modes you already know how to handle
 yourself, build the graph explicitly so you control retries, error branches, and step limits
 directly.
+
+## Day 6 — LangGraph state machine
+
+Confirmed both exit criteria live: a severe review (severity=5) correctly routed to escalate ->
+approval, hit interrupt(), and genuinely paused - the returned state had status='escalated',
+approved=None, and an __interrupt__ key, with no progress to send_node. Resumed that exact run in
+a completely separate `python3 -c` process (not just a new function call - a fresh process with
+zero memory of the first run), giving it only the same thread_id, and it picked up exactly at
+approval_node, applied the resumed decision, and completed to status='sent'. This only worked
+because the checkpointer is SqliteSaver (disk-backed) - LangGraph's InMemorySaver would not have
+survived the process boundary, which is the actual point of the demo.
+
+Real gotcha found on the resume run: `Deserializing unregistered type src.models.ReviewAnalysis
+from checkpoint. This will be blocked in a future version.` LangGraph's checkpoint serialization
+doesn't automatically trust arbitrary Python/Pydantic classes stored in State - putting a rich
+ReviewAnalysis object directly into the graph's state works today but is flagged as something
+that'll be blocked outright in a future langgraph-checkpoint version unless the type is
+explicitly allowlisted. Not broken yet, but a real forward-compatibility risk: worth either
+converting analysis to a plain dict before storing in State, or explicitly registering the type,
+before relying on this in anything longer-lived than a demo.
+
+Also confirmed the anti-hallucination grounding from Day 3 holds up inside the graph, not just in
+isolation: a review about the app being "slow to load" - a topic with zero matching KB doc -
+correctly got the response "the provided knowledge base excerpts do not contain any information
+... I cannot draft a resolution" instead of a fabricated answer. Also revealed a real KB gap
+(no general product-performance-feedback doc) worth adding later.
