@@ -65,6 +65,26 @@ python3 -m eval.e2e_eval   # exits 1 if score drops below 0.80
 python3 -m eval.retrieval_eval   # retrieval hit-rate, naive vs hybrid
 ```
 
+## Running the app
+
+Backend (from the repo root):
+
+```bash
+uvicorn src.api:app --reload
+```
+
+Frontend (React + TypeScript + Tailwind, calls the backend at `http://localhost:8000` by default -
+override with `VITE_API_URL` if needed):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open the printed `http://localhost:5173` URL. Routine reviews get a resolution automatically;
+severe reviews pause with an Approve/Reject panel backed by Day 6's `interrupt()`.
+
 ## Retrieval: measured, not assumed
 
 The single most differentiating piece of this project, per the plan's own framing — retrieval

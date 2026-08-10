@@ -2,6 +2,7 @@ import uuid
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import Command
 from pydantic import BaseModel
@@ -23,6 +24,13 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="ReviewGuard API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class ReviewRequest(BaseModel):
@@ -57,16 +65,19 @@ def analyze(payload: ReviewRequest):
         },
         config=config,
     )
+    analysis = result["analysis"].model_dump() if result.get("analysis") else None
     if "__interrupt__" in result:
         return {
             "thread_id": thread_id,
             "status": "pending_approval",
             "draft_response": result["draft_response"],
+            "analysis": analysis,
         }
     return {
         "thread_id": thread_id,
         "status": result["status"],
         "draft_response": result.get("draft_response"),
+        "analysis": analysis,
     }
 
 
@@ -79,4 +90,5 @@ def approve(payload: ApprovalRequest):
         "thread_id": payload.thread_id,
         "status": result["status"],
         "draft_response": result.get("draft_response"),
+        "analysis": result["analysis"].model_dump() if result.get("analysis") else None,
     }
