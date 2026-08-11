@@ -1,3 +1,4 @@
+import os
 import uuid
 from contextlib import asynccontextmanager
 
@@ -25,9 +26,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="ReviewGuard API", lifespan=lifespan)
 
+_default_origins = "http://localhost:5173,http://127.0.0.1:5173"
+_allowed_origins = os.environ.get("ALLOWED_ORIGINS", _default_origins).split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=_allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
