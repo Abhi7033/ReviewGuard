@@ -4,9 +4,9 @@ An agent that takes a customer review → judges sentiment → analyzes it → s
 resolution from a real knowledge base → escalates and pauses for human approval when the customer
 is angry, surviving a process restart mid-approval.
 
-Built day-by-day as a learn-by-building project (see `reviewguard-build-plan.md`) — every backend
-function was hand-written and reviewed line by line, not generated. One commit per day; the git
-history is the actual portfolio. Full list of what broke and why is in [`FAILURES.md`](FAILURES.md).
+Built day-by-day as a learn-by-building project — every backend function was hand-written and
+reviewed line by line, not generated. One commit per day; the git history is the actual
+portfolio. Full list of what broke and why is in [`FAILURES.md`](FAILURES.md).
 
 ## Architecture
 
