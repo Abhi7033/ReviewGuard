@@ -82,6 +82,12 @@ npm install
 npm run dev
 ```
 
+For a production build (`npm run build`), Vite bakes `VITE_API_URL` in at build time from a real
+environment variable - set it in your deploy platform's dashboard (see `frontend/.env.production.example`
+for the variable name), not in a committed file. A committed production URL would mean anyone who
+forks this repo and deploys their own copy silently builds against *your* backend instead of their
+own.
+
 Open the printed `http://localhost:5173` URL. Routine reviews get a resolution automatically;
 severe reviews pause with an Approve/Reject panel backed by Day 6's `interrupt()`.
 
