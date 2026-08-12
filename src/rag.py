@@ -2,8 +2,6 @@ import chromadb
 from chromadb import PersistentClient
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
-from rank_bm25 import BM25Okapi
-from sentence_transformers import CrossEncoder
 
 from .models import ReviewAnalysis
 
@@ -12,10 +10,14 @@ load_dotenv()
 _cross_encoder = None
 
 
-def _get_cross_encoder() -> CrossEncoder:
-    """Lazy-load the cross-encoder once and reuse it - it's slow to load."""
+def _get_cross_encoder():
+    """Lazy-load the cross-encoder once and reuse it - it's slow to load, and importing
+    sentence_transformers/torch at all pulls a lot of memory. Only retrieve_hybrid() (Day 4/5
+    tools, not the deployed /analyze path) needs this, so the import stays inside the function -
+    the deployed API never loads torch into memory at all this way."""
     global _cross_encoder
     if _cross_encoder is None:
+        from sentence_transformers import CrossEncoder
         _cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
     return _cross_encoder
 
@@ -93,6 +95,8 @@ def retrieve_hybrid(query: str, k_candidates: int = 20, k_final: int = 5) -> lis
     3. Fuse with Reciprocal Rank Fusion.
     4. Rerank the ~20 fused candidates with a cross-encoder (sentence-transformers) -> keep top 5.
     """
+    from rank_bm25 import BM25Okapi
+
     client = chromadb.PersistentClient("data/chroma")
     collection = client.get_or_create_collection("Knowledge_base")
 
