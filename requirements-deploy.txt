@@ -45,6 +45,7 @@ langchain-google-genai==4.3.3
 langchain-protocol==0.0.18
 langgraph==1.2.11
 langgraph-checkpoint==4.2.0
+langgraph-checkpoint-postgres==3.1.2
 langgraph-checkpoint-sqlite==3.1.1
 langgraph-prebuilt==1.1.0
 langgraph-sdk==0.4.2
@@ -68,6 +69,9 @@ overrides==7.7.0
 packaging==26.3
 propcache==0.5.2
 protobuf==7.35.1
+psycopg==3.3.4
+psycopg-binary==3.3.4
+psycopg-pool==3.3.1
 pyasn1==0.6.4
 pyasn1_modules==0.4.2
 pybase64==1.5.0

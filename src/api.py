@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from langgraph.checkpoint.postgres import PostgresSaver
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.types import Command
 from pydantic import BaseModel
@@ -16,9 +17,18 @@ _checkpointer_cm = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    """Postgres when DATABASE_URL is set (deployed: survives container restarts, unlike local
+    disk on Render's free tier) - falls back to the local SQLite file otherwise, so local dev
+    doesn't need a Postgres account."""
     global _graph, _checkpointer_cm
-    _checkpointer_cm = SqliteSaver.from_conn_string("data/graph_checkpoints.db")
-    checkpointer = _checkpointer_cm.__enter__()
+    database_url = os.environ.get("DATABASE_URL")
+    if database_url:
+        _checkpointer_cm = PostgresSaver.from_conn_string(database_url)
+        checkpointer = _checkpointer_cm.__enter__()
+        checkpointer.setup()
+    else:
+        _checkpointer_cm = SqliteSaver.from_conn_string("data/graph_checkpoints.db")
+        checkpointer = _checkpointer_cm.__enter__()
     _graph = build_graph(checkpointer)
     yield
     _checkpointer_cm.__exit__(None, None, None)
